@@ -1,9 +1,16 @@
-
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { rooms } from '@/data/rooms';
 import SafeImage from '@/components/ui/SafeImage';
 import { IMAGES } from '@/data/images';
+
+// Narrow the room image lookup so TS knows every possible key,
+// and safely fall back if room.id isn't one of them.
+type RoomImageKey = keyof typeof IMAGES.rooms;
+
+function getRoomImage(id: string): string | undefined {
+  return (IMAGES.rooms as Record<string, string>)[id];
+}
 
 export default function CategoryShowcase() {
   return (
@@ -137,7 +144,7 @@ export default function CategoryShowcase() {
             >
               {/* Room image */}
               <SafeImage
-                src={IMAGES.rooms[room.id]}
+                src={getRoomImage(room.id)}
                 alt={room.name}
                 fallback="bg-gradient-to-br from-paper-deep to-brass-300/60"
                 className="
