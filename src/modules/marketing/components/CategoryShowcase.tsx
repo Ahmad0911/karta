@@ -4,10 +4,6 @@ import { rooms } from '@/data/rooms';
 import SafeImage from '@/components/ui/SafeImage';
 import { IMAGES } from '@/data/images';
 
-// Narrow the room image lookup so TS knows every possible key,
-// and safely fall back if room.id isn't one of them.
-type RoomImageKey = keyof typeof IMAGES.rooms;
-
 function getRoomImage(id: string): string | undefined {
   return (IMAGES.rooms as Record<string, string>)[id];
 }
